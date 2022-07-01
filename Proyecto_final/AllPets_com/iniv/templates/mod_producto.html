@@ -89,6 +89,8 @@
                             {% if user.is_authenticated %}
                             <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_producto' %}">Crear producto</a></li>
                             <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar' %}">Mostrar producto</a></li>
+                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_cli' %}">crear cliente</a></li>
+                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar_cli' %}">Mostrar clientes</a></li>
                             {% endif %}
                             <li class="nav-item r-3"><a class="nav-link" href="{% url 'feriados' %}">Feriados</a></li>
                             <div class=" ms-5 nav-item r-3">

@@ -5,10 +5,12 @@ from pyexpat.errors import messages
 from typing_extensions import Self
 from django.shortcuts import get_object_or_404, redirect, render
 
+
 from iniv.forms import ProductoForm,CustomUserCreationForm,ClienteForm
 from iniv.models import Producto,Cliente
 from django.contrib.auth import authenticate,login,logout
 from fastapi import FastAPI
+
 
 # Create your views here.
 def home (request):
@@ -54,24 +56,22 @@ def crear_producto(request):
         pro_form = ProductoForm()
     return render(request, 'crear_producto.html', {'pro_form': pro_form})
 
-def mod_pro(request, id):
-    producto = get_object_or_404(Producto,codigo=id)
+def mod_producto(request, id):
+    producto = Producto.objects.get(codigo=id)
     datos = {
         'form': ProductoForm(instance = producto)
     }
     if request.method=='POST':
-        formulario = ProductoForm(data=request.POST, instance = Producto,files=request.FILES)
+        formulario = ProductoForm(data=request.POST, instance = Producto)
         if formulario.is_valid():
             formulario.save()
             return redirect ('mostrar')
-        
     return render(request, 'mod_producto.html', datos)
 
 def del_pro(request,id):
-    producto = Producto.objects.get(codigo=id)
+    producto =Producto.objects.get(codigo=id)
     producto.delete()
     return redirect('mostrar')
-    return render(request,'registro.html',data) 
 #############CRUD PRODUCTOS###################
 
 app = FastAPI()
@@ -108,7 +108,7 @@ def crear_cli(request):
     return render(request, 'crear_cli.html', {'cli_form': cli_form})
 
 def modificar_cli(request, id):
-    cliente = get_object_or_404(Cliente,rut=id)
+    cliente = Cliente.objects.get(rut=id)
     datos = {
         'form': ClienteForm(instance = cliente)
     }
@@ -117,7 +117,6 @@ def modificar_cli(request, id):
         if formulario.is_valid():
             formulario.save()
             return redirect ('mostrar_cli')
-        
     return render(request, 'modificar_cli.html', datos)
 
 def delete_cli(request,id):

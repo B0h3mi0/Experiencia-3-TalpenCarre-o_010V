@@ -25,12 +25,12 @@ class Producto(models.Model):
 
 ######### CLIENTE ########
 class Cliente(models.Model):
-    rut = models.CharField( max_length=20, primary_key=True, verbose_name='Rut')
-    nombre= models.CharField(max_length=20, verbose_name='Nombre')
-    apellido=models.CharField(max_length=20, verbose_name='Apellido')
-    edad=models.IntegerField( verbose_name='Edad')
-    sexo=models.CharField(max_length=10 ,verbose_name='Genero')
-    nroTelefono=models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name='Telefono')
+    rut = models.CharField(max_length=10, primary_key=True, verbose_name='Rut')
+    nombre= models.CharField(null='True', max_length=20, verbose_name='Nombre')
+    apellido=models.CharField(null='True', max_length=20, verbose_name='Apellido')
+    correo=models.CharField(null='True', max_length=50,verbose_name='Correo')
+    direccion=models.CharField(null='True',max_length=50,verbose_name='Direccion')
+    nroTelefono=models.CharField(null='True', max_length=15, verbose_name='Telefono')
 
     def __str__(self):
         return self.rut

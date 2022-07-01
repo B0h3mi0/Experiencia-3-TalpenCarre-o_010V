@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'fastapi',
     'uvicorn',
+    'rest_framework',
+    'rest_cliente',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

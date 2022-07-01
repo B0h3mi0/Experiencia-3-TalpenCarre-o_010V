@@ -68,7 +68,7 @@
 
 
 </script>
-    <title>Crear Vehiculo</title>
+    <title>Crear Productos</title>
 </head>
 <body>
     {% load static %}
@@ -89,6 +89,8 @@
                             {% if user.is_authenticated %}
                             <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_producto' %}">Crear producto</a></li>
                             <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar' %}">Mostrar producto</a></li>
+                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_cli' %}">crear cliente</a></li>
+                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar_cli' %}">Mostrar clientes</a></li>
                             {% endif %}
                             <li class="nav-item r-3"><a class="nav-link" href="{% url 'feriados' %}">Feriados</a></li>
                             <div class=" ms-5 nav-item r-3">
@@ -110,7 +112,7 @@
 
         <!---{% if user.is_authenticated  %}------->
         <div class="row">
-            <form method="POST" action="#" id="formulario" enctype="multipart/form-data">
+            <form method="POST" action="#" id="formulario" >
                 {% csrf_token %}
                 <div class="form-group">
                     {{ pro_form.codigo.label }}
@@ -147,7 +149,7 @@
             </form>
            <!---- {% else %}---->
             <br><br><br>
-            <h3 style="color: red; text-align: center;">No tiene permisos para Agregar Vehiculos</h3>
+            <h3 style="color: red; text-align: center;">No tiene permisos para Agregar Productos</h3>
             <!--{%endif%}--->
         </div>
     </div>

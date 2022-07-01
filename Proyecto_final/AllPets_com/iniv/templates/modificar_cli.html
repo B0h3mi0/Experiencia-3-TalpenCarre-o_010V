@@ -37,8 +37,8 @@
                         rut: "required",
                         nombre: "required",
                         apellido: "required",
-                        edad: "required",
-                        sexo: "required",
+                        correo: "required",
+                        direccion: "required",
                         nroTelefono: "required",
                 }   
                 
@@ -53,11 +53,11 @@
             apellido:{
                 required: 'Ingrese apellido del producto',
             },
-            edad:{
-                required: 'Ingrese una edad',
+            correo:{
+                required: 'Ingrese una correo',
             },
-            sexo:{
-                required: 'Seleccione sexo',
+            direccion:{
+                required: 'Seleccione direccion',
             },
             nroTelefono:{
                 required: 'Seleccione una nroTelefono',
@@ -89,6 +89,8 @@
                             {% if user.is_authenticated %}
                             <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_producto' %}">Crear producto</a></li>
                             <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar' %}">Mostrar producto</a></li>
+                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_cli' %}">crear cliente</a></li>
+                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar_cli' %}">Mostrar clientes</a></li>
                             {% endif %}
                             <li class="nav-item r-3"><a class="nav-link" href="{% url 'feriados' %}">Feriados</a></li>
                             <div class=" ms-5 nav-item r-3">
@@ -128,13 +130,13 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.edad.label }}
-                    {{ form.edad }}
+                    {{ form.correo.label }}
+                    {{ form.correo }}
                 </div>
 
                 <div class="form-group">
-                    {{ cli_form.sexo.label }}
-                    {{ cli_form.sexo }}
+                    {{ form.direccion.label }}
+                    {{ form.direccion }}
                 </div>
                 <div class="form-group">
                     {{ form.nroTelefono.label }}
@@ -144,8 +146,9 @@
 
 
                 <br><br>
-                <input type="submit" class="btn btn-primary" value="Enviar">
-                <a href="{% url 'mostrar_cli' %}"  class="btn btn-success">Mostrar clientes</a>
+                <input type="submit" class="btn btn-primary" value="Modificar">
+                <input type="reset" class="btn btn-danger" value="Limpiar">
+                <a href="{% url 'mostrar_cli' %}"  class="btn btn-success">Mostrando clientes</a>
             </form>
             {% else %}
             <br><br><br>
