@@ -34,10 +34,10 @@ def registro (request):
             formulario.save()
             user= authenticate(username= formulario.cleaned_data["username"],password=formulario.cleaned_data["password1"])
             login=(request,user)
-            messages.success(request,"te has registrado correctamente")
+            messages.success(request,"Te has registrado correctamente")
             return redirect(to="home.html")
         data["form"]= formulario
-    return render(request,'registro.html',data) 
+    return render(request,'registration/registro.html',data) 
 #############CRUD PRODUCTOS###################
 def mostrar(request):
     Productos = Producto.objects.all()
@@ -45,6 +45,13 @@ def mostrar(request):
         'productos' : Productos
     }
     return render(request, 'mostrar.html', datos)
+
+def productos_venta(request):
+    Productos = Producto.objects.all()
+    datos = {
+        'productos' : Productos
+    }
+    return render(request, 'galery.html', datos)
 
 def crear_producto(request): 
     if request.method=='POST':

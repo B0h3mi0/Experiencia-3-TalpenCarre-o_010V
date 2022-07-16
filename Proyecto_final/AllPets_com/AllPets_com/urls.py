@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from argparse import Namespace
 from xml.dom.minidom import Document
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from AllPets_com.settings import DEBUG
+
+import cart
 
 import iniv
 
@@ -28,7 +31,7 @@ urlpatterns = [
     path('',include('iniv.urls')),
     path('accounts/', include('django.contrib.auth.urls')), 
     path('api/', include('rest_cliente.urls')),
-    
+    path('carrito/', include ('cart.urls')),
 
 ]
 if settings.DEBUG:

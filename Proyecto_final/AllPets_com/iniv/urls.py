@@ -1,13 +1,15 @@
 from operator import mod
 from django.urls import path 
-from .views import home, mostrar_cli, registro, somos, feriados,galeria, registro,contacto, mostrar, crear_producto, mod_producto, del_pro, mostrar_cli,crear_cli,modificar_cli,delete_cli
+from .import views
+from django.contrib.auth.views import logout_then_login
+from .views import home, mostrar_cli, productos_venta, registro, somos, feriados,galeria, registro,contacto, mostrar, crear_producto, mod_producto, del_pro, mostrar_cli,crear_cli,modificar_cli,delete_cli
     
 
 urlpatterns =[
     path('',home,name="home"),
     path('somos/', somos, name="somos"),
     path('feriados/',feriados, name="feriados"),
-    path('galeria/', galeria, name="galeria"),
+    path('galeria/', productos_venta, name="galeria"),
     path('registro/', registro, name="registro"),
     path('contacto/', contacto, name="contacto"),
 
@@ -27,4 +29,8 @@ urlpatterns =[
     path('modificar_cli/<id>', modificar_cli, name="modificar_cli"),
     path('delete_cli/<id>', delete_cli, name="delete_cli"),
     #############CRUD clientes###################
+
+    path('logout/',logout_then_login,name='logout'),
+    path('registro/',registro,name='registro')
+
 ]

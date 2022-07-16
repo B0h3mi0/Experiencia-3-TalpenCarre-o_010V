@@ -73,20 +73,53 @@
                         <li class="nav-item r-3"><a class="nav-link" href="{% url 'galeria' %}">Nuestros Productos</a></li>
                         <li class="nav-item r-3"><a class="nav-link" href="{% url 'somos' %}">Quienes Somos</a></li>
                         <li class="nav-item r-3"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
-                        {% if user.is_authenticated %}
-                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_producto' %}">Crear producto</a></li>
-                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar' %}">Mostrar producto</a></li>
-                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_cli' %}">crear cliente</a></li>
-                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar_cli' %}">Mostrar clientes</a></li>
-                        {% endif %}
                         <li class="nav-item r-3"><a class="nav-link" href="{% url 'feriados' %}">Feriados</a></li>
-                        <div class=" ms-5 nav-item r-3">
                         {% if user.is_authenticated %}
-                        <a class="nav-link" href="#">Bienvenido @{{user.username}}</a>
-                        {% else %} 
-                        <a class="nav-link" href="{% url 'login' %}">Ingresa</a>
+
+                        <div class="ps-3  dropdown">
+                          <button class="nav-link btn dropdown-toggle" type="button" id="dropdownCliente" data-bs-toggle="dropdown" aria-expanded="false">
+                            Clientes
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownCliente">
+                            <li><a class="dropdown-item" href="{% url 'crear_cli' %}">Crear nuevo cliente</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mostrar_cli' %}">Mostrar clientes registrados</a></li>
+                          </ul>
+                        </div>
+
+                        <div class="ps-3  dropdown">
+                          <button class="nav-link btn dropdown-toggle" type="button" id="dropdownProducto" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownProducto">
+                            <li><a class="dropdown-item" href="{% url 'crear_producto' %}">Crear nuevo producto</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mostrar' %}">Mostrar productos</a></li>
+                          </ul>
+                        </div>
+                        {% endif %}
+                        <div class="p-4"></div>
+                        <div class="ps-4 nav-item r-3">
+                        {% if user.is_authenticated %}
+                            <a class="nav-link" href="#">Bienvenido @{{user.username}}</a>
+                        </div>
+                        
+                        <div class="ps-4 nav-item r-3">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                  </svg>
+                            </a>
+                        </div>
+                          {% else %} 
+                          <a class="nav-link" href="{% url 'login' %}">Ingresa
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                              </svg>
+                          </a>
                         {% endif %}
                         </div>
+                    </div>
                     </ul>
                 </div>
             </div>

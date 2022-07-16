@@ -52,7 +52,7 @@ class ProductoForm(forms.ModelForm):
             'categoria': forms.Select(
                 attrs={
                     'class': 'form-control',
-                    'id': 'categoria'
+                    'nombre': 'categoria'
                 }
             ),
             'imagen': forms.FileInput(

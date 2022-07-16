@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
-    
-    <style>
-        body{
-            font-family: Arial;
-        }
+    <!-- Jquery -->
 
+    <style>
         .error-control{
             border: 1px solid red;
         }
@@ -65,48 +66,80 @@
         }//messages
       }); //$('#mi-formulario').validate
   }); //function
-
-
 </script>
+
     <title>Crear Cliente</title>
 </head>
 <body>
     {% load static %}
-    <!-- MENU CABECERA  PAGINA ------------------------------------------------>
-    <div class="container-fluid">
-        <nav class="shadow-sm p-2 mb-5 rounded navbar navbar-expand-lg navbar-light border-3 border-bottom border-secondary"    style="background-color:rgb(194, 228, 208) ;">
-                <div class="container">
-                    <a href="#" class="navbar-brand"><img src="{% static 'img/LOGO.jpg' %}" style=" border:2px solid indigo;border-radius: 25px; width: 45px; height: 45px;" alt="LOGO AllPets">AllPets</a>
-                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
-                        <i class="icon ion-md-menu"></i>
-                    </button>
-                    <div id="MenuNavegacion" class="collapse navbar-collapse" style="padding-right: 40px;">
-                        <ul class="navbar-nav ms-3">
-                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
-                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'galeria' %}">Nuestros Productos</a></li>
-                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'somos' %}">Quienes Somos</a></li>
-                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
-                            {% if user.is_authenticated %}
-                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_producto' %}">Crear producto</a></li>
-                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar' %}">Mostrar producto</a></li>
-                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_cli' %}">crear cliente</a></li>
-                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar_cli' %}">Mostrar clientes</a></li>
-                            {% endif %}
-                            <li class="nav-item r-3"><a class="nav-link" href="{% url 'feriados' %}">Feriados</a></li>
-                            <div class=" ms-5 nav-item r-3">
-                            {% if user.is_authenticated %}
+   <!-- MENU CABECERA  PAGINA ------------------------------------------------>
+<div class="container-fluid">
+    <nav class="shadow-sm p-2 mb-5 rounded navbar navbar-expand-lg navbar-light border-3 border-bottom border-secondary"    style="background-color:rgb(194, 228, 208) ;">
+            <div class="container">
+                <a href="#" class="navbar-brand"><img src="{% static 'img/LOGO.jpg' %}" style=" border:2px solid indigo;border-radius: 25px; width: 45px; height: 45px;" alt="LOGO AllPets">AllPets</a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
+                    <i class="icon ion-md-menu"></i>
+                </button>
+                <div id="MenuNavegacion" class="collapse navbar-collapse" style="padding-right: 40px;">
+                    <ul class="navbar-nav ms-3">
+                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
+                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'galeria' %}">Nuestros Productos</a></li>
+                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'somos' %}">Quienes Somos</a></li>
+                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
+                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'feriados' %}">Feriados</a></li>
+                        {% if user.is_authenticated %}
+
+                        <div class="ps-3  dropdown">
+                          <button class="nav-link btn dropdown-toggle" type="button" id="dropdownCliente" data-bs-toggle="dropdown" aria-expanded="false">
+                            Clientes
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownCliente">
+                            <li><a class="dropdown-item" href="{% url 'crear_cli' %}">Crear nuevo cliente</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mostrar_cli' %}">Mostrar clientes registrados</a></li>
+                          </ul>
+                        </div>
+
+                        <div class="ps-3  dropdown">
+                          <button class="nav-link btn dropdown-toggle" type="button" id="dropdownProducto" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownProducto">
+                            <li><a class="dropdown-item" href="{% url 'crear_producto' %}">Crear nuevo producto</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mostrar' %}">Mostrar productos</a></li>
+                          </ul>
+                        </div>
+                        {% endif %}
+                        <div class="p-4"></div>
+                        <div class="ps-4 nav-item r-3">
+                        {% if user.is_authenticated %}
                             <a class="nav-link" href="#">Bienvenido @{{user.username}}</a>
-                            {% else %} 
-                            <a class="nav-link" href="{% url 'login' %}">Ingresa</a>
-                            {% endif %}
-                            </div>
-                        </ul>
+                        </div>
+                        
+                        <div class="ps-4 nav-item r-3">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                  </svg>
+                            </a>
+                        </div>
+                          {% else %} 
+                          <a class="nav-link" href="{% url 'login' %}">Ingresa
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                              </svg>
+                          </a>
+                        {% endif %}
+                        </div>
                     </div>
+                    </ul>
                 </div>
             </div>
-        </nav>
-    </div>
-    <!-- MENU CABECERA  PAGINA ------------------------------------------------>
+        </div>
+    </nav>
+</div>
+<!-- MENU CABECERA  PAGINA ------------------------------------------------>
     <div class="container">
         <h2>Creando Clientes</h2>
 

@@ -8,12 +8,65 @@
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet"> 
+    <!-- Latest compiled and minified CSS -->
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/estilos.css"> <!---HOJA DE ESTILOS CSS ------------------------>
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <!-- Jquery -->
+    <style>
+        .error-control{
+            border: 1px solid red;
+        }
+
+        label.error{
+            color: red;
+            width: 200px;
+            font-size: 0.8em;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+<script>
+
+    $(function() 
+    {
+    $("#formulario").validate({
+        rules: {
+                email: {
+                        nombre: "required",
+                        apellido: "required",
+                        nroTelefono: "required",
+                        correo: "required",
+                        comentario: "required",
+                }   
+                
+            }, //rules
+        messages: {
+            nombre: {
+                required: 'Ingrese nombre',
+            },
+            apellido:{
+                required: 'Ingrese apellido',
+            },
+            nroTelefono:{
+                required: 'Seleccione una teléfono',
+            },
+            correo:{
+                required: 'Ingrese correo',
+            },
+            comentario:{
+                required: '¿Como lo podemos ayudar?',
+            },
+            
+        }//messages
+      }); //$('#mi-formulario').validate
+  }); //function
+</script>
+
 </head>
+
 <body>
     {% load static %}
 <!-- MENU CABECERA  PAGINA ------------------------------------------------>
@@ -30,20 +83,53 @@
                         <li class="nav-item r-3"><a class="nav-link" href="{% url 'galeria' %}">Nuestros Productos</a></li>
                         <li class="nav-item r-3"><a class="nav-link" href="{% url 'somos' %}">Quienes Somos</a></li>
                         <li class="nav-item r-3"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
-                        {% if user.is_authenticated %}
-                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_producto' %}">Crear producto</a></li>
-                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar' %}">Mostrar producto</a></li>
-                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'crear_cli' %}">crear cliente</a></li>
-                        <li class="nav-item r-3"><a class="nav-link" href="{% url 'mostrar_cli' %}">Mostrar clientes</a></li>
-                        {% endif %}
                         <li class="nav-item r-3"><a class="nav-link" href="{% url 'feriados' %}">Feriados</a></li>
-                        <div class=" ms-5 nav-item r-3">
                         {% if user.is_authenticated %}
-                        <a class="nav-link" href="#">Bienvenido @{{user.username}}</a>
-                        {% else %} 
-                        <a class="nav-link" href="{% url 'login' %}">Ingresa</a>
+
+                        <div class="ps-3  dropdown">
+                          <button class="nav-link btn dropdown-toggle" type="button" id="dropdownCliente" data-bs-toggle="dropdown" aria-expanded="false">
+                            Clientes
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownCliente">
+                            <li><a class="dropdown-item" href="{% url 'crear_cli' %}">Crear nuevo cliente</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mostrar_cli' %}">Mostrar clientes registrados</a></li>
+                          </ul>
+                        </div>
+
+                        <div class="ps-3  dropdown">
+                          <button class="nav-link btn dropdown-toggle" type="button" id="dropdownProducto" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownProducto">
+                            <li><a class="dropdown-item" href="{% url 'crear_producto' %}">Crear nuevo producto</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mostrar' %}">Mostrar productos</a></li>
+                          </ul>
+                        </div>
+                        {% endif %}
+                        <div class="p-4"></div>
+                        <div class="ps-4 nav-item r-3">
+                        {% if user.is_authenticated %}
+                            <a class="nav-link" href="#">Bienvenido @{{user.username}}</a>
+                        </div>
+                        
+                        <div class="ps-4 nav-item r-3">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                  </svg>
+                            </a>
+                        </div>
+                          {% else %} 
+                          <a class="nav-link" href="{% url 'login' %}">Ingresa
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                              </svg>
+                          </a>
                         {% endif %}
                         </div>
+                    </div>
                     </ul>
                 </div>
             </div>
@@ -53,34 +139,34 @@
 <!-- MENU CABECERA  PAGINA ------------------------------------------------>
 
 <!-- CONTENIDO DE LA PAGINA ------------------------------------------------>
-<div class="container" style="text-align: center;margin-top: 90px;"> 
+<div class="container" style="text-align: center;"> 
     <h1 style="font-family: 'Courier New', Courier, monospace;">Contáctanos</h1> 
     <div  class="container"  style="align-items: center;" id="caja">
-        <form style="align-items: center;" id="mi-formulario2" action="contacto.html" method="post">
+        <form style="align-items: center;" id="formulario" action="#" method="post">
             
             <div class="form-group">
                 <label for="Nombre">Ingrese su nombre: </label>
-                <input type="text" class="form-control" id="Nombre" name="Nombre" 
+                <input type="text" class="form-control" id="nombre" name="nombre" 
                     onchange="CambiarMayusculas()" minlength="2"  required>
             </div>
             <div class="form-group">
                 <label for="Apellido">Ingrese su Apellido: </label>
-                <input type="text" class="form-control" id="Apellido" name="Apellido" 
+                <input type="text" class="form-control" id="apellido" name="apellido" 
                     onchange="CambiarMayusculas()" minlength="2" required >
             </div>
             <div class="form-group">
                 <label>Teléfono: </label>
                 
-                <input class="form-control" type="number" name="fono" minlength="9" required>
+                <input class="form-control" type="number" id="nroTelefono" name="nroTelefono" minlength="9" required>
             </div>
             <div class="form-group">
                 <label>Correo Electrónico:</label>
-                <input class="form-control" type="text" name="email" required placeholder="nombre@dominio.cl">
+                <input class="form-control" type="text" id="correo" name="correo" required placeholder="nombre@dominio.cl">
                 
             </div>
             <div class="form-group">
                 <label>Comentario: </label> <br>
-                <input class="form-control" type="text" name="Comentario" required>  
+                <input class="form-control" type="text"id="comentario"  name="comentario" required>  
             </div>
             <div class="container row">
                 <div class="col-4"></div>

@@ -1,0 +1,23 @@
+{% for pro in productos %} 
+    <!-- First Photo Grid-->
+    <div class="col" style="align-items: center">
+      <div class="row " style="align-items: center">
+        <div class="col-sm-4" style="text-align: center;">
+          <img src="{{ pro.imagen.url }}" style="width:230px;height:230px;">
+          <h3>{{ pro.precio }}</h3>
+          <p>{{ pro.nombre }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" style="align-items: center">
+        <div class="row " style="align-items: center">
+          <div class="col-sm-4" style="text-align: center;">
+            <img src="{{ pro.imagen.url }}" style="width:230px;height:230px;">
+            <h3>{{ pro.precio }}</h3>
+            <p>{{ pro.nombre }}</p>
+          </div>
+        </div>
+      </div>
+    
+    
